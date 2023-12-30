@@ -1,10 +1,9 @@
 
 
-
+ 
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
 
 public class test {
     private static final String FILE_PATH = "/workspaces/BioShrimpCoding/user_credentials.txt";
@@ -16,30 +15,59 @@ public class test {
         // Prompt user for username and password
         MainThing mainThing = new MainThing();
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Log in or sign up? (l/s)");
+        String choice = scanner.nextLine();
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        scanner.close();
 
         // Check if the credentials exist
-        if (credentials.containsKey(username) && credentials.get(username).equals(password)) {
-            System.out.println("Logging in...");
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (choice.equals("l") || choice.equals("log in")) {
+            if (credentials.containsKey(username) && credentials.get(username).equals(password)) {
+                System.out.println("Logging in...");
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Logged in successfully.");
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("hello");
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mainThing.run();
             }
-            System.out.println("Logged in successfully.");
-            mainThing.run();
-        } else {
-            // Save the new credentials
-            credentials.put(username, password);
-            saveCredentials(credentials);
+        } else if (choice.equals("s") || choice.equals("sign up")) {
+            
+                if (credentials.containsKey(username)) {
+                    System.out.println("Username already exists. Please choose a different username.");
+                    test.SighnIn();
+                } else {
+                    // Add the new credentials
+                    credentials.put(username, password);
 
-            System.out.println("Credentials saved successfully.");
+                    // Save the updated credentials
+                    saveCredentials(credentials);
+
+                    System.out.println("Account created successfully.");
+                    
+                }
+            
         }
+                
+                
     }
+    
+    
+
 
     private static Map<String, String> loadCredentials() {
         Map<String, String> credentials = new HashMap<>();
@@ -74,6 +102,29 @@ public class test {
             // Handle file write error
             System.err.println("Error saving credentials: " + e.getMessage());
         }
+    }
+    
+    private static void SighnIn(){
+        Map<String, String> credentials = loadCredentials();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+        if (credentials.containsKey(username)) {
+            System.out.println("Username already exists. Please choose a different username.");
+        test.SighnIn();
+        }
+    else {
+            // Add the new credentials
+            credentials.put(username, password);
+
+            // Save the updated credentials
+            saveCredentials(credentials);
+
+            System.out.println("Account created successfully.");         }
+        
+
     }
 }
 

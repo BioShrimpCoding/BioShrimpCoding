@@ -4,8 +4,11 @@ import java.util.Scanner;
 
 public class Calculator  {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("mortgage or normal calculator? (m/n)");
+      
+}
+public void run(){  
+    Scanner scanner = new Scanner(System.in);
+        System.out.print("mortgage or normal calculator? (m/n)");
         String type = scanner.nextLine();
 
         if (type.equals("m")) {
@@ -17,13 +20,13 @@ public class Calculator  {
                 float interest = scanner.nextFloat();
 
                 System.out.print("Years: ");
-                byte years = scanner.nextByte();
+                int years = scanner.nextByte();
 
-                int months = 12;
+                final int months = 12;
                 int monthlyPayment = (int) (loan * (interest / months) / (1 - Math.pow(1 + interest / months, -months * years)));
 
                 String mortgage = "Your yearly payment is $" + monthlyPayment;
-                System.out.println(mortgage);
+                System.out.println(mortgage); 
             }
         } else if (type.equals("n")) {
             try (scanner) {
@@ -66,4 +69,5 @@ public class Calculator  {
             System.out.println("Invalid input");
     }
 }
+
 }
