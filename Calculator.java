@@ -1,8 +1,8 @@
-package com.google.mail;
+
 
 import java.util.Scanner;
 
-public class Calculator {
+public class Calculator  {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("mortgage or normal calculator? (m/n)");
